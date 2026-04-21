@@ -1,0 +1,585 @@
+{
+  "meta": {
+    "name": "The Daily Reflection Tree",
+    "version": "1.0",
+    "axes": ["locus", "orientation", "radius"],
+    "description": "A deterministic end-of-day reflection tool built on Rotter (1954), Dweck (2006), Campbell et al. (2004), Organ (1988), Maslow (1969), and Batson (2011)."
+  },
+  "nodes": [
+
+    {
+      "id": "START",
+      "parentId": null,
+      "type": "start",
+      "text": "Good evening. You made it to the end of another day.\n\nThis isn't a performance review. Nobody's grading you.\nThis is just a few minutes to look at the day honestly — what happened, how you showed up, and what you might take forward.\n\nLet's begin.",
+      "options": [],
+      "target": "A1_OPEN",
+      "signal": null
+    },
+
+    {
+      "id": "A1_OPEN",
+      "parentId": "START",
+      "type": "question",
+      "text": "If today were a weather report, what would it be?",
+      "options": [
+        "Sunny — things clicked, I felt in control",
+        "Overcast — fine, but something felt off",
+        "Stormy — things went sideways, I felt thrown around",
+        "Foggy — I'm not sure what even happened today"
+      ],
+      "target": null,
+      "signal": null
+    },
+
+    {
+      "id": "A1_D1",
+      "parentId": "A1_OPEN",
+      "type": "decision",
+      "text": "",
+      "options": [
+        "answer=Sunny — things clicked, I felt in control:A1_Q1_HIGH",
+        "answer=Overcast — fine, but something felt off:A1_Q1_MID",
+        "answer=Stormy — things went sideways, I felt thrown around:A1_Q1_LOW",
+        "answer=Foggy — I'm not sure what even happened today:A1_Q1_LOW"
+      ],
+      "target": null,
+      "signal": null
+    },
+
+    {
+      "id": "A1_Q1_HIGH",
+      "parentId": "A1_D1",
+      "type": "question",
+      "text": "You said today felt like '{A1_OPEN.answer}'. When something went well, what do you think made it happen?",
+      "options": [
+        "I had prepared — I put in the groundwork",
+        "I adapted when the plan changed",
+        "The team or someone else made it work",
+        "Honestly, it just happened to work out"
+      ],
+      "target": null,
+      "signal": "axis1:internal"
+    },
+
+    {
+      "id": "A1_Q1_MID",
+      "parentId": "A1_D1",
+      "type": "question",
+      "text": "You said today felt like '{A1_OPEN.answer}'. When something didn't go as expected, what was your first instinct?",
+      "options": [
+        "Figure out what part of it I could still control",
+        "Feel frustrated by the circumstances",
+        "Push through and try a different approach",
+        "Wait to see if the situation resolved itself"
+      ],
+      "target": null,
+      "signal": null
+    },
+
+    {
+      "id": "A1_Q1_LOW",
+      "parentId": "A1_D1",
+      "type": "question",
+      "text": "You said today felt like '{A1_OPEN.answer}'. When things went sideways, what was your first reaction?",
+      "options": [
+        "I looked for what I could do differently",
+        "I felt like the situation was unfair",
+        "I tried to adapt, even if I wasn't sure how",
+        "I felt stuck and waited for something to change"
+      ],
+      "target": null,
+      "signal": null
+    },
+
+    {
+      "id": "A1_D2",
+      "parentId": "A1_Q1_HIGH",
+      "type": "decision",
+      "text": "",
+      "options": [
+        "answer=I had prepared — I put in the groundwork:A1_Q2_INT",
+        "answer=I adapted when the plan changed:A1_Q2_INT",
+        "answer=The team or someone else made it work:A1_Q2_EXT",
+        "answer=Honestly, it just happened to work out:A1_Q2_EXT"
+      ],
+      "target": null,
+      "signal": null
+    },
+
+    {
+      "id": "A1_D2B",
+      "parentId": "A1_Q1_MID",
+      "type": "decision",
+      "text": "",
+      "options": [
+        "answer=Figure out what part of it I could still control:A1_Q2_INT",
+        "answer=Feel frustrated by the circumstances:A1_Q2_EXT",
+        "answer=Push through and try a different approach:A1_Q2_INT",
+        "answer=Wait to see if the situation resolved itself:A1_Q2_EXT"
+      ],
+      "target": null,
+      "signal": null
+    },
+
+    {
+      "id": "A1_D2C",
+      "parentId": "A1_Q1_LOW",
+      "type": "decision",
+      "text": "",
+      "options": [
+        "answer=I looked for what I could do differently:A1_Q2_INT",
+        "answer=I felt like the situation was unfair:A1_Q2_EXT",
+        "answer=I tried to adapt, even if I wasn't sure how:A1_Q2_INT",
+        "answer=I felt stuck and waited for something to change:A1_Q2_EXT"
+      ],
+      "target": null,
+      "signal": null
+    },
+
+    {
+      "id": "A1_Q2_INT",
+      "parentId": null,
+      "type": "question",
+      "text": "Think of one specific decision you made today — big or small. What drove it?",
+      "options": [
+        "I thought it was the right call given what I knew",
+        "I acted on instinct",
+        "I followed what was expected of me",
+        "I wasn't sure, so I did what seemed safest"
+      ],
+      "target": null,
+      "signal": "axis1:internal"
+    },
+
+    {
+      "id": "A1_Q2_EXT",
+      "parentId": null,
+      "type": "question",
+      "text": "Was there a moment today where you had more choice than you initially thought?",
+      "options": [
+        "Yes — I realized I could have responded differently",
+        "Maybe — I hadn't thought about it that way",
+        "No — the situation really didn't leave room for choice",
+        "I'm not sure what choice I even had"
+      ],
+      "target": null,
+      "signal": "axis1:external"
+    },
+
+    {
+      "id": "A1_D3",
+      "parentId": "A1_Q2_INT",
+      "type": "decision",
+      "text": "",
+      "options": [
+        "answer=I thought it was the right call given what I knew:A1_R_INT",
+        "answer=I acted on instinct:A1_R_INT",
+        "answer=I followed what was expected of me:A1_R_MID",
+        "answer=I wasn't sure, so I did what seemed safest:A1_R_MID"
+      ],
+      "target": null,
+      "signal": null
+    },
+
+    {
+      "id": "A1_D3B",
+      "parentId": "A1_Q2_EXT",
+      "type": "decision",
+      "text": "",
+      "options": [
+        "answer=Yes — I realized I could have responded differently:A1_R_MID",
+        "answer=Maybe — I hadn't thought about it that way:A1_R_EXT",
+        "answer=No — the situation really didn't leave room for choice:A1_R_EXT",
+        "answer=I'm not sure what choice I even had:A1_R_EXT"
+      ],
+      "target": null,
+      "signal": null
+    },
+
+    {
+      "id": "A1_R_INT",
+      "parentId": null,
+      "type": "reflection",
+      "text": "You navigated today with your hands on the wheel.\n\nThat doesn't mean everything went perfectly — it means that when things shifted, you looked for what you could do, not just what was happening to you. That's agency. Not superhero control — just the habit of asking 'what's my move here?' even when the answer isn't obvious.\n\nThat question — 'what's my move?' — is worth carrying into tomorrow.",
+      "options": [],
+      "target": "BRIDGE_1_2",
+      "signal": "axis1:internal"
+    },
+
+    {
+      "id": "A1_R_MID",
+      "parentId": null,
+      "type": "reflection",
+      "text": "Today had moments where you owned your choices — and moments where you let things unfold around you.\n\nBoth are honest responses to a busy day. The interesting question is: in the moments you felt most stuck, was there actually no choice — or did the choice just feel too risky, too unclear, or too tiring to make?\n\nNoticing the difference is the beginning of something useful.",
+      "options": [],
+      "target": "BRIDGE_1_2",
+      "signal": "axis1:internal"
+    },
+
+    {
+      "id": "A1_R_EXT",
+      "parentId": null,
+      "type": "reflection",
+      "text": "Today felt like it happened to you more than with you.\n\nThat's a real experience — not a character flaw. Some days are genuinely hard, and circumstances do matter. But here's a small thing worth sitting with: even in the worst moments today, you made at least one call. You responded somehow. That response — however small — was yours.\n\nWhat was it?",
+      "options": [],
+      "target": "BRIDGE_1_2",
+      "signal": "axis1:external"
+    },
+
+    {
+      "id": "BRIDGE_1_2",
+      "parentId": null,
+      "type": "bridge",
+      "text": "Okay. You've looked at how you handled today.\n\nNow let's look at something different — not how you handled things, but what you gave.",
+      "options": [],
+      "target": "A2_OPEN",
+      "signal": null
+    },
+
+    {
+      "id": "A2_OPEN",
+      "parentId": "BRIDGE_1_2",
+      "type": "question",
+      "text": "Think about the interactions you had today — with colleagues, a manager, a client, anyone. Which of these best captures how you showed up?",
+      "options": [
+        "I helped someone with something — it wasn't my job, but I did it anyway",
+        "I focused on getting my own work done well",
+        "I felt like my contributions weren't being noticed",
+        "I was waiting for more clarity, support, or recognition before I could give more"
+      ],
+      "target": null,
+      "signal": null
+    },
+
+    {
+      "id": "A2_D1",
+      "parentId": "A2_OPEN",
+      "type": "decision",
+      "text": "",
+      "options": [
+        "answer=I helped someone with something — it wasn't my job, but I did it anyway:A2_Q1_CON",
+        "answer=I focused on getting my own work done well:A2_Q1_MID",
+        "answer=I felt like my contributions weren't being noticed:A2_Q1_ENT",
+        "answer=I was waiting for more clarity, support, or recognition before I could give more:A2_Q1_ENT"
+      ],
+      "target": null,
+      "signal": null
+    },
+
+    {
+      "id": "A2_Q1_CON",
+      "parentId": "A2_D1",
+      "type": "question",
+      "text": "You mentioned going beyond what was expected. What motivated that?",
+      "options": [
+        "I just saw a need and moved",
+        "I wanted to be useful — it felt meaningful",
+        "I was hoping it would be noticed or reciprocated",
+        "I felt guilty not helping"
+      ],
+      "target": null,
+      "signal": "axis2:contribution"
+    },
+
+    {
+      "id": "A2_Q1_MID",
+      "parentId": "A2_D1",
+      "type": "question",
+      "text": "You focused on your own work today. Was there a moment where someone else could have used your help — and you noticed it?",
+      "options": [
+        "Yes, and I helped anyway",
+        "Yes, but I was too pressed for time",
+        "Yes, but I assumed they'd figure it out",
+        "I didn't really notice — I was in my own lane"
+      ],
+      "target": null,
+      "signal": null
+    },
+
+    {
+      "id": "A2_Q1_ENT",
+      "parentId": "A2_D1",
+      "type": "question",
+      "text": "When you think about what you felt you deserved today — recognition, support, clarity — do you feel that expectation was earned or assumed?",
+      "options": [
+        "Earned — I've been putting in real effort",
+        "Mostly earned, but I might be expecting too much",
+        "Honestly, I'm not sure I've done enough to expect more",
+        "I think I assume I deserve more than I've shown"
+      ],
+      "target": null,
+      "signal": "axis2:entitlement"
+    },
+
+    {
+      "id": "A2_D2",
+      "parentId": "A2_Q1_CON",
+      "type": "decision",
+      "text": "",
+      "options": [
+        "answer=I just saw a need and moved:A2_R_CON",
+        "answer=I wanted to be useful — it felt meaningful:A2_R_CON",
+        "answer=I was hoping it would be noticed or reciprocated:A2_R_MID",
+        "answer=I felt guilty not helping:A2_R_MID"
+      ],
+      "target": null,
+      "signal": null
+    },
+
+    {
+      "id": "A2_D2B",
+      "parentId": "A2_Q1_MID",
+      "type": "decision",
+      "text": "",
+      "options": [
+        "answer=Yes, and I helped anyway:A2_R_CON",
+        "answer=Yes, but I was too pressed for time:A2_R_MID",
+        "answer=Yes, but I assumed they'd figure it out:A2_R_MID",
+        "answer=I didn't really notice — I was in my own lane:A2_R_ENT"
+      ],
+      "target": null,
+      "signal": null
+    },
+
+    {
+      "id": "A2_D2C",
+      "parentId": "A2_Q1_ENT",
+      "type": "decision",
+      "text": "",
+      "options": [
+        "answer=Earned — I've been putting in real effort:A2_R_MID",
+        "answer=Mostly earned, but I might be expecting too much:A2_R_MID",
+        "answer=Honestly, I'm not sure I've done enough to expect more:A2_R_ENT",
+        "answer=I think I assume I deserve more than I've shown:A2_R_ENT"
+      ],
+      "target": null,
+      "signal": null
+    },
+
+    {
+      "id": "A2_R_CON",
+      "parentId": null,
+      "type": "reflection",
+      "text": "Today you gave something — and not because you had to.\n\nThat kind of discretionary effort is rarer than it looks. It doesn't show up in a job description. It doesn't get tracked in a spreadsheet. But it's the thing that makes teams actually function. The colleague you helped today may not have mentioned it — but they noticed.\n\nContribution without scorekeeping is a quiet strength. Hold onto that.",
+      "options": [],
+      "target": "BRIDGE_2_3",
+      "signal": "axis2:contribution"
+    },
+
+    {
+      "id": "A2_R_MID",
+      "parentId": null,
+      "type": "reflection",
+      "text": "Today you stayed in your lane — which sometimes is exactly the right call.\n\nBut there's a question worth asking: when you think about today's interactions, are you mostly tallying what you gave, or what you got? Neither is wrong — but the balance shifts how the day feels, and how your colleagues experience you.\n\nSmall contributions — noticing someone struggling, sharing a piece of information, finishing something cleanly — accumulate into something real.",
+      "options": [],
+      "target": "BRIDGE_2_3",
+      "signal": "axis2:contribution"
+    },
+
+    {
+      "id": "A2_R_ENT",
+      "parentId": null,
+      "type": "reflection",
+      "text": "Today you were thinking about what you deserved — and that's honest to name.\n\nThe tricky thing about entitlement is that it's invisible from the inside. It doesn't feel like entitlement; it feels like fairness. But when the gap between 'what I expect' and 'what I give' widens, it doesn't just affect morale — it closes off the very opportunities we're waiting for.\n\nThis isn't a verdict. It's just a pattern worth watching.",
+      "options": [],
+      "target": "BRIDGE_2_3",
+      "signal": "axis2:entitlement"
+    },
+
+    {
+      "id": "BRIDGE_2_3",
+      "parentId": null,
+      "type": "bridge",
+      "text": "You've looked at how you handled things — and what you gave.\n\nFor the last part, let's zoom out. Beyond you, beyond your tasks — who else was in today?",
+      "options": [],
+      "target": "A3_OPEN",
+      "signal": null
+    },
+
+    {
+      "id": "A3_OPEN",
+      "parentId": "BRIDGE_2_3",
+      "type": "question",
+      "text": "When you think about today's biggest challenge — who comes to mind?",
+      "options": [
+        "Just me — it was mine to solve, and I was focused on myself",
+        "My team — we were all dealing with the pressure together",
+        "A specific person who was struggling more than me",
+        "The people we ultimately serve — customers, users, or the wider purpose"
+      ],
+      "target": null,
+      "signal": null
+    },
+
+    {
+      "id": "A3_D1",
+      "parentId": "A3_OPEN",
+      "type": "decision",
+      "text": "",
+      "options": [
+        "answer=Just me — it was mine to solve, and I was focused on myself:A3_Q1_SELF",
+        "answer=My team — we were all dealing with the pressure together:A3_Q1_MID",
+        "answer=A specific person who was struggling more than me:A3_Q1_ALT",
+        "answer=The people we ultimately serve — customers, users, or the wider purpose:A3_Q1_ALT"
+      ],
+      "target": null,
+      "signal": null
+    },
+
+    {
+      "id": "A3_Q1_SELF",
+      "parentId": "A3_D1",
+      "type": "question",
+      "text": "When today got hard, the frame was personal — your stress, your problem. Is there someone at work right now who is carrying something heavier than you?",
+      "options": [
+        "Yes — someone specific comes to mind",
+        "Probably, but I don't know enough about their situation",
+        "I don't think so — everyone seems okay",
+        "I haven't really thought about it"
+      ],
+      "target": null,
+      "signal": "axis3:self"
+    },
+
+    {
+      "id": "A3_Q1_MID",
+      "parentId": "A3_D1",
+      "type": "question",
+      "text": "You thought about your team today. Was there a specific person whose experience you were aware of — someone whose difficulty mattered to you?",
+      "options": [
+        "Yes — I checked in on them or tried to help",
+        "Yes — I was aware but didn't do anything",
+        "Not really — I thought about the team generally, not one person",
+        "I was focused on the group outcome, not individuals"
+      ],
+      "target": null,
+      "signal": "axis3:mid"
+    },
+
+    {
+      "id": "A3_Q1_ALT",
+      "parentId": "A3_D1",
+      "type": "question",
+      "text": "You were thinking beyond yourself today. When you consider the impact of your work — the people at the end of it — does that feel real to you, or abstract?",
+      "options": [
+        "Real — I can picture specific people it affects",
+        "Somewhat real — I know they exist but feel distant from them",
+        "Abstract — I rarely think about the end impact",
+        "I'm not sure who my work ultimately affects"
+      ],
+      "target": null,
+      "signal": "axis3:altrocentric"
+    },
+
+    {
+      "id": "A3_D2",
+      "parentId": "A3_Q1_SELF",
+      "type": "decision",
+      "text": "",
+      "options": [
+        "answer=Yes — someone specific comes to mind:A3_R_MID",
+        "answer=Probably, but I don't know enough about their situation:A3_R_MID",
+        "answer=I don't think so — everyone seems okay:A3_R_SELF",
+        "answer=I haven't really thought about it:A3_R_SELF"
+      ],
+      "target": null,
+      "signal": null
+    },
+
+    {
+      "id": "A3_D2B",
+      "parentId": "A3_Q1_MID",
+      "type": "decision",
+      "text": "",
+      "options": [
+        "answer=Yes — I checked in on them or tried to help:A3_R_ALT",
+        "answer=Yes — I was aware but didn't do anything:A3_R_MID",
+        "answer=Not really — I thought about the team generally, not one person:A3_R_MID",
+        "answer=I was focused on the group outcome, not individuals:A3_R_MID"
+      ],
+      "target": null,
+      "signal": null
+    },
+
+    {
+      "id": "A3_D2C",
+      "parentId": "A3_Q1_ALT",
+      "type": "decision",
+      "text": "",
+      "options": [
+        "answer=Real — I can picture specific people it affects:A3_R_ALT",
+        "answer=Somewhat real — I know they exist but feel distant from them:A3_R_MID",
+        "answer=Abstract — I rarely think about the end impact:A3_R_SELF",
+        "answer=I'm not sure who my work ultimately affects:A3_R_SELF"
+      ],
+      "target": null,
+      "signal": null
+    },
+
+    {
+      "id": "A3_R_SELF",
+      "parentId": null,
+      "type": "reflection",
+      "text": "Today was experienced mostly through your own lens — your challenges, your pressure, your frame.\n\nThat's completely understandable. Hard days pull us inward. But here's something Maslow noticed late in his life: the people who reported the most meaning weren't the ones who got more — they were the ones who had something outside themselves to care about.\n\nYou don't have to solve anyone else's problems. But noticing them — even briefly — changes the size of the day.",
+      "options": [],
+      "target": "SUMMARY",
+      "signal": "axis3:self"
+    },
+
+    {
+      "id": "A3_R_MID",
+      "parentId": null,
+      "type": "reflection",
+      "text": "Today you held both — your own experience and some awareness of others.\n\nThat balance is harder than it sounds. Genuine perspective-taking — actually imagining what someone else's day felt like — is a skill, not a personality trait. It gets sharper with practice.\n\nThe question is simple: did you leave anyone today more equipped or less alone than when you found them? Even once counts.",
+      "options": [],
+      "target": "SUMMARY",
+      "signal": "axis3:mid"
+    },
+
+    {
+      "id": "A3_R_ALT",
+      "parentId": null,
+      "type": "reflection",
+      "text": "Today you looked up from your own experience and into someone else's.\n\nThat's not nothing. Most of what makes work feel meaningful isn't the tasks themselves — it's the awareness that your effort matters to someone real. You already have that. The challenge now is sustaining it on the days when it's harder to see.\n\nYou did something today that extended beyond you. That's what the best versions of our work look like.",
+      "options": [],
+      "target": "SUMMARY",
+      "signal": "axis3:altrocentric"
+    },
+
+    {
+      "id": "SUMMARY",
+      "parentId": null,
+      "type": "summary",
+      "text": "Here's what today looked like, honestly:\n\nOn agency, you leaned {axis1.dominant}.\nOn contribution, you leaned {axis2.dominant}.\nOn radius, you leaned {axis3.dominant}.\n\n{summary_reflection}\n\nThese aren't scores. They're signals — snapshots of how you showed up today. Tomorrow is a clean slate.",
+      "options": [],
+      "target": "END",
+      "signal": null,
+      "summary_templates": {
+        "internal_contribution_altrocentric": "Three strong signals today: you saw your choices, you gave without keeping score, and you thought beyond yourself. That combination is rare — and it compounds over time.",
+        "internal_contribution_mid": "You had your hands on the wheel today and you gave something real. The next edge: widening the lens to include the people your work touches at the far end.",
+        "internal_contribution_self": "You navigated today with agency and gave meaningfully. The one thing to carry forward: who else was in your day? Someone probably noticed you, even if you didn't notice them.",
+        "internal_entitlement_altrocentric": "You showed real agency today and genuine awareness of others. The gap worth watching: the contribution side. Agency and awareness are powerful — they get even more powerful when paired with discretionary effort.",
+        "internal_entitlement_mid": "You owned your choices today. The pattern to watch is the expectation side — the gap between what you felt you deserved and what you gave. That gap is worth measuring honestly.",
+        "internal_entitlement_self": "You drove today — but the lens was narrow. Agency is a tool. What matters is what you point it at. Tomorrow: one external focus, one moment of giving without expecting.",
+        "external_contribution_altrocentric": "You gave today, and you thought about others — both strong. The thread to pick up tomorrow: where did you have more choice than you thought? That's where your growth is.",
+        "external_contribution_mid": "You contributed meaningfully today even when you felt buffeted by circumstances. Strengthening agency doesn't mean controlling more — it means noticing your choices earlier.",
+        "external_contribution_self": "Today felt circumstantial, and you stayed focused on your own territory. Two things worth growing: seeing your choices earlier, and noticing who else is in the room.",
+        "external_entitlement_altrocentric": "You thought beyond yourself today — that's genuinely valuable. The areas to build: seeing the choices available to you, and shifting from what you deserve to what you can give.",
+        "external_entitlement_mid": "Today had a lot of external pressure and some entitlement patterns. No shame in that — it's honest. The question for tomorrow: what's one thing you could give without waiting to receive first?",
+        "external_entitlement_self": "Today was tough, and the lens was narrow and outward-looking in a waiting way. The place to start: just one small choice tomorrow that you own completely. Build from there."
+      }
+    },
+
+    {
+      "id": "END",
+      "parentId": "SUMMARY",
+      "type": "end",
+      "text": "That's it for tonight.\n\nGet some rest. Tomorrow's a new attempt.\n\nSee you then.",
+      "options": [],
+      "target": null,
+      "signal": null
+    }
+
+  ]
+}
